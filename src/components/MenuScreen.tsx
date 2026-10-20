@@ -82,8 +82,8 @@ export function MenuScreen({ menu }: MenuScreenProps) {
   const openedCategory = opened ? menu.categories.find((category) => category.id === opened.categoryId) : undefined;
 
   const navClass = (isActive: boolean) =>
-    `inline-flex min-h-12 shrink-0 items-center px-1 text-left font-serif text-[1.15rem] tracking-[0.16em] uppercase ${
-      isActive ? 'text-ink underline decoration-ink/50 decoration-1 underline-offset-[7px]' : 'text-muted'
+    `inline-flex min-h-12 shrink-0 items-center px-1 text-left text-[13px] tracking-[0.14em] whitespace-nowrap uppercase ${
+      isActive ? 'text-ink underline decoration-1 underline-offset-[6px]' : 'text-muted'
     }`;
 
   return (
@@ -93,16 +93,16 @@ export function MenuScreen({ menu }: MenuScreenProps) {
           <h1 className="wordmark">Osteria Alba</h1>
           <p className="eyebrow mt-2 text-[13px] tracking-[0.28em] text-muted uppercase">cucina italiana</p>
         </div>
-        <div className="mt-4 flex w-full min-w-0 flex-col gap-1 border-t border-line pt-2 min-[900px]:flex-row min-[900px]:items-center min-[900px]:justify-end">
-          <form className="relative w-full min-[900px]:w-72" role="search" onSubmit={(event) => event.preventDefault()}>
-            <Search className="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 text-muted" size={18} />
+        <div className="mx-auto mt-5 flex w-full max-w-xl min-w-0 flex-col gap-1 min-[900px]:flex-row min-[900px]:items-center">
+          <form className="relative w-full min-[900px]:flex-1" role="search" onSubmit={(event) => event.preventDefault()}>
+            <Search className="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 text-muted" size={16} />
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Найти блюдо"
               aria-label="Поиск по названию"
               autoComplete="off"
-              className="h-12 w-full border-b border-ink/20 bg-transparent pr-10 pl-7 text-base text-ink outline-none placeholder:text-muted"
+              className="h-12 w-full border-b border-line bg-transparent pr-10 pl-7 text-base text-ink outline-none placeholder:text-muted"
             />
             {query ? (
               <button
@@ -141,7 +141,7 @@ export function MenuScreen({ menu }: MenuScreenProps) {
       <div className="flex min-h-0 flex-1 flex-col min-[900px]:flex-row">
         <nav
           aria-label="Категории"
-          className="no-scrollbar flex shrink-0 gap-5 overflow-x-auto border-b border-line px-5 py-1 min-[900px]:w-48 min-[900px]:flex-col min-[900px]:gap-1 min-[900px]:overflow-y-auto min-[900px]:border-r min-[900px]:border-b-0 min-[900px]:px-8 min-[900px]:py-6"
+          className="no-scrollbar flex shrink-0 gap-5 overflow-x-auto border-b border-line px-5 py-1 min-[900px]:w-52 min-[900px]:flex-col min-[900px]:gap-0 min-[900px]:overflow-y-auto min-[900px]:border-r min-[900px]:border-b-0 min-[900px]:px-8 min-[900px]:py-8"
         >
           <button type="button" onClick={() => goTo('all')} className={navClass(active === 'all')}>
             Всё меню
@@ -175,12 +175,10 @@ export function MenuScreen({ menu }: MenuScreenProps) {
             <div className="space-y-14">
               {sections.map((section) => (
                 <section key={section.category.id} id={`section-${section.category.id}`} className="scroll-mt-4">
-                  <header className="mb-8 flex items-center gap-5">
-                    <span aria-hidden className="h-px flex-1 bg-ink/20" />
-                    <h2 className="font-serif text-[1.7rem] tracking-[0.22em] text-ink uppercase">{section.category.name}</h2>
-                    <span aria-hidden className="h-px flex-1 bg-ink/20" />
+                  <header className="mb-8 text-center">
+                    <h2 className="font-serif text-[1.15rem] tracking-[0.34em] text-ink uppercase">{section.category.name}</h2>
                   </header>
-                  <div className="grid grid-cols-1 gap-x-12 gap-y-12 min-[900px]:grid-cols-2 min-[1500px]:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-x-14 gap-y-14 min-[900px]:grid-cols-2 min-[1500px]:grid-cols-3">
                     {section.items.map((item, index) => (
                       <DishCard
                         key={item.id}

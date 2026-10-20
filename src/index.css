@@ -3,10 +3,10 @@
 @theme {
   --font-serif: 'Cormorant Garamond', 'Iowan Old Style', Palatino, 'Times New Roman', serif;
   --font-sans: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
-  --color-paper: #fffcf7;
-  --color-ink: #1c140e;
-  --color-muted: #7a6e62;
-  --color-line: #e4d9cc;
+  --color-paper: #ffffff;
+  --color-ink: #111111;
+  --color-muted: #6a6a6a;
+  --color-line: #e8e8e8;
 }
 
 html,
@@ -17,8 +17,8 @@ body,
 
 body {
   margin: 0;
-  background: #fffcf7;
-  color: #1c140e;
+  background: #ffffff;
+  color: #111111;
   font-family: var(--font-sans);
   font-size: 16px;
 }
@@ -35,8 +35,8 @@ body {
 
 @media (min-width: 900px) {
   .wordmark {
-    letter-spacing: 0.28em;
-    font-size: clamp(3rem, 4.2vw, 4.15rem);
+    letter-spacing: 0.22em;
+    font-size: clamp(2.6rem, 3.4vw, 3.4rem);
   }
 }
 
@@ -61,7 +61,7 @@ body {
 
 .modal-panel {
   animation: rise 0.28s ease both;
-  box-shadow: 0 24px 60px rgba(28, 20, 14, 0.16);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
 }
 
 @keyframes rise {
@@ -76,7 +76,7 @@ body {
 }
 
 .menu-scroll {
-  scrollbar-color: rgba(28, 20, 14, 0.28) transparent;
+  scrollbar-color: rgba(17, 17, 17, 0.22) transparent;
 }
 
 .menu-scroll::-webkit-scrollbar {
@@ -84,7 +84,7 @@ body {
 }
 
 .menu-scroll::-webkit-scrollbar-thumb {
-  background: rgba(28, 20, 14, 0.28);
+  background: rgba(17, 17, 17, 0.22);
 }
 
 .no-scrollbar {
@@ -114,7 +114,7 @@ input {
 }
 
 ::selection {
-  background: rgba(28, 20, 14, 0.12);
+  background: rgba(17, 17, 17, 0.1);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -66,10 +66,10 @@ export function DishModal({ item, category, onClose }: DishModalProps) {
           </h2>
           <p className="mt-4 font-serif text-2xl tracking-wide text-ink">{formatPortion(item.weight, item.price)}</p>
           {!item.available ? <p className="mt-3 text-base tracking-[0.08em] text-muted uppercase">Нет в наличии</p> : null}
-          <p className="mt-6 font-serif text-[1.25rem] leading-snug text-ink italic">{item.description}</p>
+          <p className="mt-6 text-base leading-relaxed text-ink">{item.description}</p>
           <div className="mt-6">
             <p className="meta-label text-[12px] tracking-[0.18em] text-muted uppercase">Состав</p>
-            <p className="mt-2 font-serif text-[1.2rem] leading-snug text-muted">{item.composition}</p>
+            <p className="mt-2 leading-relaxed text-muted">{item.composition}</p>
           </div>
           <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-line pt-5">
             <div>
