@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-serif: 'Fraunces', 'Iowan Old Style', Palatino, serif;
+  --font-sans: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+  --color-coal: #110e0c;
+  --color-ember: #1b1612;
+  --color-bark: #2a221c;
+  --color-cream: #f3ecdf;
+  --color-sand: #cbbba6;
+  --color-mist: #8f8172;
+  --color-copper: #e0a36a;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #110e0c;
+  color: #f3ecdf;
+  font-family: var(--font-sans);
+  font-size: 16px;
+}
+
+.app-bg {
+  background-color: #110e0c;
+  background-image:
+    radial-gradient(880px 420px at 0% -10%, rgba(176, 98, 48, 0.2), transparent 58%),
+    radial-gradient(640px 360px at 100% 110%, rgba(72, 32, 16, 0.35), transparent 52%);
+}
+
+.photo-scrim {
+  background: linear-gradient(to top, rgba(12, 9, 7, 0.88) 0%, rgba(12, 9, 7, 0.15) 46%, transparent 68%);
+}
+
+.dish-video {
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.dish-video.is-on {
+  opacity: 1;
+}
+
+.is-stopped img,
+.is-stopped video {
+  filter: grayscale(1) contrast(0.92);
+  opacity: 0.62;
+}
+
+.menu-scroll {
+  scrollbar-color: rgba(224, 163, 106, 0.4) transparent;
+}
+
+.menu-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.menu-scroll::-webkit-scrollbar-thumb {
+  background: rgba(224, 163, 106, 0.4);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.kiosk,
+.kiosk * {
+  user-select: none;
+}
+
+.kiosk .eyebrow,
+.kiosk .tag,
+.kiosk .meta-label {
+  font-size: 16px;
+  letter-spacing: 0.08em;
+}
+
+button,
+a,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(224, 163, 106, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,123 @@
+# Замените OWNER/REPO на владельца и имя репозитория, например octocat/ognivo-menu.
+# Язык интерфейса Sveltia берёт из браузера (русский встроен).
+# Ключ locale в конфиге игнорируется, поэтому его здесь нет.
+backend:
+  name: github
+  repo: OWNER/REPO
+  branch: main
+
+media_folder: public/media
+public_folder: media
+
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      max_file_size: 5242880
+
+collections:
+  - name: menu
+    label: Меню
+    description: Категории и блюда гостевого меню. Стоп-лист — выключенное поле «В наличии». После сохранения GitHub Actions обновит сайт примерно за минуту.
+    icon: local_fire_department
+    editor:
+      preview: false
+    files:
+      - name: menu
+        label: Меню
+        file: public/data/menu.json
+        format: json
+        fields:
+          - name: categories
+            label: Категории
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - name: id
+                label: ID
+                widget: string
+                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Латиница в нижнем регистре, цифры и дефис']
+                hint: Уникальный код, например starters. Не меняйте у уже сохранённых категорий.
+              - name: name
+                label: Название
+                widget: string
+              - name: order
+                label: Порядок
+                widget: number
+                value_type: int
+                min: 0
+          - name: items
+            label: Блюда
+            widget: list
+            summary: "{{name}} — {{price}} ₽"
+            thumbnail: image
+            fields:
+              - name: id
+                label: ID
+                widget: string
+                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Латиница в нижнем регистре, цифры и дефис']
+                hint: Уникальный код, например ribeye. Не меняйте у уже показанных блюд.
+              - name: categoryId
+                label: Категория
+                widget: select
+                options:
+                  - { label: К огню, value: starters }
+                  - { label: С очага, value: hearth }
+                  - { label: Из печи, value: oven }
+                  - { label: После жара, value: sweets }
+                hint: Если добавите категорию, допишите её id в этот список в config.yml.
+              - name: name
+                label: Название
+                widget: string
+              - name: description
+                label: Описание
+                widget: text
+              - name: composition
+                label: Состав
+                widget: text
+              - name: price
+                label: Цена
+                widget: number
+                value_type: int
+                min: 0
+                hint: Целое число в рублях, без знака валюты.
+              - name: weight
+                label: Вес
+                widget: string
+                hint: Как на карточке, например «220 г».
+              - name: calories
+                label: Калории
+                widget: number
+                value_type: int
+                min: 0
+              - name: tags
+                label: Теги
+                widget: list
+                required: false
+                hint: Короткие слова, например «уголь».
+              - name: image
+                label: Фото
+                widget: image
+                hint: WebP или JPG, до 1600 px и около 500 КБ.
+              - name: video
+                label: Видео
+                widget: file
+                required: false
+                hint: MP4 без звука, до 10 секунд и 5 МБ. Пустое поле — только фото.
+              - name: available
+                label: В наличии
+                widget: boolean
+                default: true
+                required: false
+                hint: Выключите, чтобы поставить блюдо в стоп-лист. Гость увидит «Нет в наличии».
+              - name: published
+                label: Опубликовано
+                widget: boolean
+                default: true
+                required: false
+                hint: Выключите, чтобы скрыть блюдо с гостевого меню.
+              - name: order
+                label: Порядок
+                widget: number
+                value_type: int
+                min: 0
