@@ -83,7 +83,7 @@ export function MenuScreen({ menu }: MenuScreenProps) {
 
   return (
     <div className={`app-bg flex h-dvh flex-col text-cream ${kiosk ? 'kiosk' : ''}`}>
-      <header className="flex shrink-0 flex-wrap items-center gap-x-6 gap-y-3 border-b border-white/10 px-5 py-3 min-[900px]:px-7">
+      <header className="flex shrink-0 flex-col gap-3 border-b border-white/10 px-5 py-3 min-[900px]:flex-row min-[900px]:items-center min-[900px]:gap-6 min-[900px]:px-7">
         <div className="flex items-center gap-3">
           <Flame className="text-copper" size={26} aria-hidden="true" />
           <div>
@@ -92,7 +92,7 @@ export function MenuScreen({ menu }: MenuScreenProps) {
           </div>
         </div>
         <form
-          className="relative order-last min-w-0 w-full min-[900px]:order-none min-[900px]:w-auto min-[900px]:max-w-md min-[900px]:flex-1"
+          className="relative min-w-0 w-full min-[900px]:max-w-md min-[900px]:flex-1"
           role="search"
           onSubmit={(event) => event.preventDefault()}
         >
@@ -115,12 +115,12 @@ export function MenuScreen({ menu }: MenuScreenProps) {
             </button>
           ) : null}
         </form>
-        <div className="ml-auto flex items-center gap-1">
+        <div className="flex items-center gap-1">
           <button
             type="button"
             aria-pressed={kiosk}
             onClick={toggleKiosk}
-            className={`inline-flex min-h-12 items-center px-4 ${
+            className={`inline-flex min-h-12 items-center whitespace-nowrap px-4 ${
               kiosk ? 'bg-copper text-coal' : 'border border-white/15 text-cream'
             }`}
           >
@@ -129,7 +129,7 @@ export function MenuScreen({ menu }: MenuScreenProps) {
           {kiosk ? null : (
             <a
               href={`${import.meta.env.BASE_URL}admin/`}
-              className="inline-flex min-h-12 items-center px-3 text-sand"
+              className="inline-flex min-h-12 items-center whitespace-nowrap px-3 text-sand"
             >
               Для кухни
             </a>
