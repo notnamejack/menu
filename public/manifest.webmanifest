@@ -1,12 +1,12 @@
 {
-  "name": "Огниво — меню",
-  "short_name": "Огниво",
-  "description": "Цифровое меню дровяного зала «Огниво»",
+  "name": "Osteria Alba — меню",
+  "short_name": "Osteria Alba",
+  "description": "Цифровое меню Osteria Alba. Cucina italiana.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#110e0c",
-  "theme_color": "#110e0c",
+  "background_color": "#e7e5e1",
+  "theme_color": "#e7e5e1",
   "lang": "ru",
   "icons": [
     {

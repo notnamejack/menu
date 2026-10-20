@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { assetUrl } from '../lib/assets';
-import { formatPrice } from '../lib/format';
+import { formatPortion } from '../lib/format';
 import type { Category, MenuItem } from '../types';
 
 type DishModalProps = {
@@ -25,14 +25,14 @@ export function DishModal({ item, category, onClose }: DishModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 min-[900px]:p-8" role="presentation">
-      <button type="button" aria-label="Закрыть" className="absolute inset-0 bg-black/75" onClick={onClose} />
+      <button type="button" aria-label="Закрыть" className="absolute inset-0 bg-ink/40" onClick={onClose} />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="dish-title"
-        className="relative grid max-h-[92dvh] w-full max-w-5xl overflow-hidden border border-white/15 bg-coal shadow-none min-[900px]:grid-cols-2"
+        className="modal-panel relative grid max-h-[92dvh] w-full max-w-5xl overflow-hidden bg-white min-[900px]:grid-cols-2"
       >
-        <div className="relative min-h-64 bg-bark">
+        <div className="relative min-h-64 bg-paper">
           {item.video && !reduceMotion ? (
             <video
               className="h-full max-h-[46dvh] w-full object-cover min-[900px]:max-h-[92dvh] min-[900px]:min-h-full"
@@ -52,48 +52,48 @@ export function DishModal({ item, category, onClose }: DishModalProps) {
             />
           )}
         </div>
-        <div className="relative overflow-y-auto px-6 py-7 min-[900px]:px-8 min-[900px]:py-10">
+        <div className="relative overflow-y-auto px-6 py-8 min-[900px]:px-9 min-[900px]:py-10">
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="absolute top-3 right-3 inline-flex size-12 items-center justify-center text-cream"
+            className="absolute top-3 right-3 inline-flex size-12 items-center justify-center text-ink"
             aria-label="Закрыть блюдо"
           >
             <X size={22} />
           </button>
           {category ? (
-            <p className="meta-label text-[12px] tracking-[0.22em] text-copper uppercase">{category.name}</p>
+            <p className="meta-label pr-12 text-[12px] tracking-[0.2em] text-muted uppercase">{category.name}</p>
           ) : null}
-          <h2 id="dish-title" className="mt-2 pr-12 font-serif text-4xl leading-none tracking-tight text-cream">
+          <h2 id="dish-title" className="mt-2 pr-12 text-4xl leading-none font-medium tracking-tight text-ink">
             {item.name}
           </h2>
-          <p className="mt-4 font-serif text-3xl text-copper">{formatPrice(item.price)}</p>
-          {!item.available ? (
-            <p className="mt-4 inline-block border border-white/20 px-3 py-2 text-sand">Нет в наличии</p>
-          ) : null}
-          <p className="mt-6 text-lg leading-relaxed text-cream">{item.description}</p>
+          <p className="mt-4 text-lg tracking-wide text-ink">{formatPortion(item.weight, item.price)}</p>
+          {!item.available ? <p className="mt-3 text-base tracking-[0.08em] text-muted uppercase">Нет в наличии</p> : null}
+          <p className="mt-6 text-base leading-relaxed text-ink">{item.description}</p>
           <div className="mt-6">
-            <p className="meta-label text-[12px] tracking-[0.18em] text-mist uppercase">Состав</p>
-            <p className="mt-2 leading-relaxed text-sand">{item.composition}</p>
+            <p className="meta-label text-[12px] tracking-[0.18em] text-muted uppercase">Состав</p>
+            <p className="mt-2 leading-relaxed text-muted">{item.composition}</p>
           </div>
-          <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-5">
+          <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-line pt-5">
             <div>
-              <dt className="meta-label text-[12px] tracking-[0.18em] text-mist uppercase">Вес</dt>
-              <dd className="mt-1 font-serif text-2xl">{item.weight}</dd>
+              <dt className="meta-label text-[12px] tracking-[0.18em] text-muted uppercase">Вес</dt>
+              <dd className="mt-1 text-2xl">{item.weight}</dd>
             </div>
             <div>
-              <dt className="meta-label text-[12px] tracking-[0.18em] text-mist uppercase">Калории</dt>
-              <dd className="mt-1 font-serif text-2xl">{item.calories} ккал</dd>
+              <dt className="meta-label text-[12px] tracking-[0.18em] text-muted uppercase">Калории</dt>
+              <dd className="mt-1 text-2xl">{item.calories} ккал</dd>
             </div>
           </dl>
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {item.tags.map((tag) => (
-              <li key={tag} className="tag border border-copper/30 px-2.5 py-1 text-[13px] tracking-[0.12em] text-sand uppercase">
-                {tag}
-              </li>
-            ))}
-          </ul>
+          {item.tags.length > 0 ? (
+            <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1">
+              {item.tags.map((tag) => (
+                <li key={tag} className="tag text-[12px] tracking-[0.14em] text-muted uppercase">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       </div>
     </div>

@@ -4,3 +4,7 @@ export function formatPrice(value: number): string {
   }).format(value);
   return `${formatted.replace(/[\u00A0\u202F]/g, ' ')} ₽`;
 }
+
+export function formatPortion(weight: string, price: number): string {
+  return `${weight} | ${formatPrice(price)}`;
+}
