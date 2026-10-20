@@ -1,19 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { assetUrl } from '../lib/assets';
-import { formatPortion } from '../lib/format';
+import { formatPrice } from '../lib/format';
 import type { VideoRegister } from '../lib/useVideoDirector';
 import type { MenuItem } from '../types';
 
 type DishCardProps = {
   item: MenuItem;
-  categoryName: string;
-  marker: string;
   register: VideoRegister;
   onOpen: (item: MenuItem) => void;
   delayMs?: number;
 };
 
-export function DishCard({ item, categoryName, marker, register, onOpen, delayMs = 0 }: DishCardProps) {
+export function DishCard({ item, register, onOpen, delayMs = 0 }: DishCardProps) {
   const cardRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -51,35 +49,11 @@ export function DishCard({ item, categoryName, marker, register, onOpen, delayMs
         }
       }}
       style={{ animationDelay: `${delayMs}ms` }}
-      className={`dish-card group flex cursor-pointer flex-col bg-white outline-none focus-visible:ring-1 focus-visible:ring-ink/30 ${
+      className={`dish-card group flex h-full cursor-pointer flex-col bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-ink/30 ${
         item.available ? '' : 'is-stopped'
       }`}
     >
-      <div className="px-5 pt-5 pb-4">
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="text-[1.35rem] leading-snug font-medium tracking-tight text-ink">{item.name}</h3>
-          <p className="meta-label shrink-0 pt-1 text-[11px] tracking-[0.16em] text-muted uppercase">
-            {categoryName} /{marker}
-          </p>
-        </div>
-        <p className="mt-2 line-clamp-2 text-base leading-relaxed text-muted">{item.description}</p>
-        <p className={`mt-3 text-base tracking-wide ${item.available ? 'text-ink' : 'text-muted'}`}>
-          {formatPortion(item.weight, item.price)}
-        </p>
-        {!item.available ? (
-          <p className="mt-2 text-base tracking-[0.08em] text-muted uppercase">Нет в наличии</p>
-        ) : null}
-        {item.tags.length > 0 ? (
-          <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
-            {item.tags.map((tag) => (
-              <li key={tag} className="tag text-[11px] tracking-[0.14em] text-muted uppercase">
-                {tag}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </div>
-      <div className="relative mt-auto aspect-[4/3] overflow-hidden bg-paper">
+      <div className="relative aspect-[5/4] overflow-hidden bg-paper">
         <img
           src={assetUrl(item.image)}
           alt=""
@@ -101,6 +75,24 @@ export function DishCard({ item, categoryName, marker, register, onOpen, delayMs
           />
         ) : null}
       </div>
+      <div className="mt-4 flex items-end gap-3">
+        <h3 className="font-serif text-[1.85rem] leading-none font-normal tracking-tight text-ink">{item.name}</h3>
+        <span aria-hidden className="mb-[0.35rem] h-px min-w-6 flex-1 border-b border-dotted border-ink/35" />
+        <p className={`shrink-0 font-serif text-[1.65rem] leading-none ${item.available ? 'text-ink' : 'text-muted'}`}>
+          {formatPrice(item.price)}
+        </p>
+      </div>
+      <p className="mt-2 line-clamp-2 min-h-[3.15rem] font-serif text-[1.15rem] leading-snug text-muted italic">
+        {item.description}
+      </p>
+      <p className="mt-2 text-base tracking-wide text-ink">{item.weight}</p>
+      {!item.available ? (
+        <p className="mt-1 text-base tracking-[0.08em] text-muted uppercase">Нет в наличии</p>
+      ) : (
+        <p className="mt-1 text-base tracking-[0.08em] text-transparent uppercase" aria-hidden>
+          Нет в наличии
+        </p>
+      )}
     </article>
   );
 }
