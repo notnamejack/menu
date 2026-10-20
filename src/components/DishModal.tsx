@@ -30,12 +30,12 @@ export function DishModal({ item, category, onClose }: DishModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="dish-title"
-        className="modal-panel relative grid max-h-[92dvh] w-full max-w-5xl overflow-hidden bg-white min-[900px]:grid-cols-2"
+        className="modal-panel relative grid h-[min(44rem,92dvh)] w-full max-w-5xl grid-rows-[minmax(0,42%)_minmax(0,1fr)] overflow-hidden bg-white min-[900px]:grid-cols-2 min-[900px]:grid-rows-1"
       >
-        <div className="relative min-h-64 bg-paper">
+        <div className="relative min-h-0 overflow-hidden bg-paper">
           {item.video && !reduceMotion ? (
             <video
-              className="h-full max-h-[46dvh] w-full object-cover min-[900px]:max-h-[92dvh] min-[900px]:min-h-full"
+              className="absolute inset-0 h-full w-full object-cover"
               src={assetUrl(item.video)}
               poster={assetUrl(item.image)}
               autoPlay
@@ -45,14 +45,10 @@ export function DishModal({ item, category, onClose }: DishModalProps) {
               preload="auto"
             />
           ) : (
-            <img
-              src={assetUrl(item.image)}
-              alt=""
-              className="h-full max-h-[46dvh] w-full object-cover min-[900px]:max-h-[92dvh] min-[900px]:min-h-full"
-            />
+            <img src={assetUrl(item.image)} alt="" className="absolute inset-0 h-full w-full object-cover" />
           )}
         </div>
-        <div className="relative overflow-y-auto px-6 py-8 min-[900px]:px-9 min-[900px]:py-10">
+        <div className="relative min-h-0 overflow-y-auto px-6 py-8 min-[900px]:px-9 min-[900px]:py-10">
           <button
             ref={closeRef}
             type="button"
