@@ -3,7 +3,7 @@
 # Ключ locale в конфиге игнорируется, поэтому его здесь нет.
 backend:
   name: github
-  repo: OWNER/REPO
+  repo: notnamejack/menu
   branch: main
 
 media_folder: public/media
