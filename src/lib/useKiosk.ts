@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const STORAGE_KEY = 'ognivo-kiosk';
+const STORAGE_KEY = 'osteria-kiosk';
 const IDLE_MS = 60_000;
 
 function readKioskFlag(): boolean {

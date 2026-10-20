@@ -31,16 +31,16 @@ export function App() {
   if (state.status === 'ready') return <MenuScreen menu={state.menu} />;
 
   return (
-    <div className="app-bg flex min-h-dvh items-center justify-center px-6 text-cream">
+    <div className="flex min-h-dvh items-center justify-center bg-paper px-6 text-ink">
       <div className="max-w-lg">
-        <p className="text-[11px] tracking-[0.28em] text-copper uppercase">дровяной зал</p>
-        <h1 className="mt-2 font-serif text-6xl italic">Огниво</h1>
+        <h1 className="wordmark">Osteria Alba</h1>
+        <p className="eyebrow mt-3 text-[13px] tracking-[0.16em] text-muted lowercase">cucina italiana</p>
         {state.status === 'loading' ? (
-          <p className="mt-6 text-lg text-sand">Разжигаем угли…</p>
+          <p className="mt-8 text-base text-muted">Открываем меню…</p>
         ) : (
           <>
-            <p className="mt-6 font-serif text-3xl">Меню не открылось</p>
-            <p className="mt-3 leading-relaxed text-sand">{state.message}</p>
+            <p className="mt-8 text-2xl">Меню не открылось</p>
+            <p className="mt-3 leading-relaxed text-muted">{state.message}</p>
           </>
         )}
       </div>

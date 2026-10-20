@@ -1,15 +1,12 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-serif: 'Fraunces', 'Iowan Old Style', Palatino, serif;
+  --font-serif: 'Cormorant Garamond', 'Iowan Old Style', Palatino, 'Times New Roman', serif;
   --font-sans: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
-  --color-coal: #110e0c;
-  --color-ember: #1b1612;
-  --color-bark: #2a221c;
-  --color-cream: #f3ecdf;
-  --color-sand: #cbbba6;
-  --color-mist: #8f8172;
-  --color-copper: #e0a36a;
+  --color-paper: #e7e5e1;
+  --color-ink: #1a2332;
+  --color-muted: #6f6a64;
+  --color-line: #d4d0ca;
 }
 
 html,
@@ -20,21 +17,27 @@ body,
 
 body {
   margin: 0;
-  background: #110e0c;
-  color: #f3ecdf;
+  background: #e7e5e1;
+  color: #1a2332;
   font-family: var(--font-sans);
   font-size: 16px;
 }
 
-.app-bg {
-  background-color: #110e0c;
-  background-image:
-    radial-gradient(880px 420px at 0% -10%, rgba(176, 98, 48, 0.2), transparent 58%),
-    radial-gradient(640px 360px at 100% 110%, rgba(72, 32, 16, 0.35), transparent 52%);
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 0.92;
+  font-size: 2rem;
+  color: var(--color-ink);
 }
 
-.photo-scrim {
-  background: linear-gradient(to top, rgba(12, 9, 7, 0.88) 0%, rgba(12, 9, 7, 0.15) 46%, transparent 68%);
+@media (min-width: 900px) {
+  .wordmark {
+    letter-spacing: 0.28em;
+    font-size: clamp(3rem, 4.2vw, 4.15rem);
+  }
 }
 
 .dish-video {
@@ -48,12 +51,31 @@ body {
 
 .is-stopped img,
 .is-stopped video {
-  filter: grayscale(1) contrast(0.92);
-  opacity: 0.62;
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.55;
+}
+
+.dish-card {
+  animation: rise 0.6s ease both;
+}
+
+.modal-panel {
+  animation: rise 0.28s ease both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .menu-scroll {
-  scrollbar-color: rgba(224, 163, 106, 0.4) transparent;
+  scrollbar-color: rgba(26, 35, 50, 0.28) transparent;
 }
 
 .menu-scroll::-webkit-scrollbar {
@@ -61,7 +83,7 @@ body {
 }
 
 .menu-scroll::-webkit-scrollbar-thumb {
-  background: rgba(224, 163, 106, 0.4);
+  background: rgba(26, 35, 50, 0.28);
 }
 
 .no-scrollbar {
@@ -91,7 +113,7 @@ input {
 }
 
 ::selection {
-  background: rgba(224, 163, 106, 0.35);
+  background: rgba(26, 35, 50, 0.14);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -100,5 +122,6 @@ input {
   *::after {
     scroll-behavior: auto !important;
     transition: none !important;
+    animation: none !important;
   }
 }

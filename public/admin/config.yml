@@ -1,4 +1,4 @@
-# Замените OWNER/REPO на владельца и имя репозитория, например octocat/ognivo-menu.
+# Замените OWNER/REPO на владельца и имя репозитория, например octocat/osteria-alba-menu.
 # Язык интерфейса Sveltia берёт из браузера (русский встроен).
 # Ключ locale в конфиге игнорируется, поэтому его здесь нет.
 backend:
@@ -19,7 +19,7 @@ collections:
   - name: menu
     label: Меню
     description: Категории и блюда гостевого меню. Стоп-лист — выключенное поле «В наличии». После сохранения GitHub Actions обновит сайт примерно за минуту.
-    icon: local_fire_department
+    icon: restaurant
     editor:
       preview: false
     files:
@@ -37,7 +37,7 @@ collections:
                 label: ID
                 widget: string
                 pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Латиница в нижнем регистре, цифры и дефис']
-                hint: Уникальный код, например starters. Не меняйте у уже сохранённых категорий.
+                hint: Уникальный код, например antipasti. Не меняйте у уже сохранённых категорий.
               - name: name
                 label: Название
                 widget: string
@@ -56,15 +56,15 @@ collections:
                 label: ID
                 widget: string
                 pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Латиница в нижнем регистре, цифры и дефис']
-                hint: Уникальный код, например ribeye. Не меняйте у уже показанных блюд.
+                hint: Уникальный код, например carbonara. Не меняйте у уже показанных блюд.
               - name: categoryId
                 label: Категория
                 widget: select
                 options:
-                  - { label: К огню, value: starters }
-                  - { label: С очага, value: hearth }
-                  - { label: Из печи, value: oven }
-                  - { label: После жара, value: sweets }
+                  - { label: Антипасти, value: antipasti }
+                  - { label: Паста, value: pasta }
+                  - { label: Гриль, value: grill }
+                  - { label: Десерты, value: dolci }
                 hint: Если добавите категорию, допишите её id в этот список в config.yml.
               - name: name
                 label: Название
@@ -94,7 +94,7 @@ collections:
                 label: Теги
                 widget: list
                 required: false
-                hint: Короткие слова, например «уголь».
+                hint: Короткие слова, например «паста».
               - name: image
                 label: Фото
                 widget: image
