@@ -53,7 +53,7 @@ export function DishCard({ item, register, onOpen, delayMs = 0 }: DishCardProps)
         item.available ? '' : 'is-stopped'
       }`}
     >
-      <div className="relative aspect-[5/4] overflow-hidden bg-paper">
+      <div className="relative aspect-[5/4] overflow-hidden bg-white">
         <img
           src={assetUrl(item.image)}
           alt=""
@@ -75,24 +75,17 @@ export function DishCard({ item, register, onOpen, delayMs = 0 }: DishCardProps)
           />
         ) : null}
       </div>
-      <div className="mt-4 flex items-end gap-3">
-        <h3 className="font-serif text-[1.85rem] leading-none font-normal tracking-tight text-ink">{item.name}</h3>
-        <span aria-hidden className="mb-[0.35rem] h-px min-w-6 flex-1 border-b border-dotted border-ink/35" />
-        <p className={`shrink-0 font-serif text-[1.65rem] leading-none ${item.available ? 'text-ink' : 'text-muted'}`}>
+      <div className="mt-4 flex items-baseline justify-between gap-4">
+        <h3 className="font-serif text-[1.75rem] leading-none font-normal text-ink">{item.name}</h3>
+        <p className={`shrink-0 font-serif text-[1.45rem] leading-none tabular-nums ${item.available ? 'text-ink' : 'text-muted'}`}>
           {formatPrice(item.price)}
         </p>
       </div>
-      <p className="mt-2 line-clamp-2 min-h-[3.15rem] font-serif text-[1.15rem] leading-snug text-muted italic">
-        {item.description}
+      <p className="mt-2 line-clamp-2 min-h-[2.75rem] text-[15px] leading-snug text-muted">{item.description}</p>
+      <p className="mt-3 text-[13px] tracking-[0.14em] text-muted uppercase">
+        {item.weight}
+        {item.available ? '' : ' · Нет в наличии'}
       </p>
-      <p className="mt-2 text-base tracking-wide text-ink">{item.weight}</p>
-      {!item.available ? (
-        <p className="mt-1 text-base tracking-[0.08em] text-muted uppercase">Нет в наличии</p>
-      ) : (
-        <p className="mt-1 text-base tracking-[0.08em] text-transparent uppercase" aria-hidden>
-          Нет в наличии
-        </p>
-      )}
     </article>
   );
 }
