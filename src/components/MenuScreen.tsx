@@ -1,9 +1,21 @@
 import { Search, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useKioskIdle, useKioskMode } from '../lib/useKiosk';
+import { useVideoDirector } from '../lib/useVideoDirector';
 import type { MenuData, MenuItem } from '../types';
 import { DishCard } from './DishCard';
 import { DishModal } from './DishModal';
+
+function usePrefersReducedMotion() {
+  const [reduce, setReduce] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setReduce(query.matches);
+    query.addEventListener('change', onChange);
+    return () => query.removeEventListener('change', onChange);
+  }, []);
+  return reduce;
+}
 
 type MenuScreenProps = {
   menu: MenuData;
@@ -16,6 +28,8 @@ export function MenuScreen({ menu }: MenuScreenProps) {
   const [active, setActive] = useState('all');
   const [opened, setOpened] = useState<MenuItem | null>(null);
   const [kiosk, toggleKiosk] = useKioskMode();
+  const reduceMotion = usePrefersReducedMotion();
+  const register = useVideoDirector(scrollRef, opened === null && !reduceMotion);
 
   useEffect(() => {
     setOpened((current) => {
@@ -200,8 +214,8 @@ export function MenuScreen({ menu }: MenuScreenProps) {
                         item={item}
                         onOpen={setOpened}
                         delayMs={Math.min(index, 6) * 45}
-                        videosLive={opened === null}
                         priority={section.category.order === 1 && index < 4}
+                        register={register}
                       />
                     ))}
                   </div>

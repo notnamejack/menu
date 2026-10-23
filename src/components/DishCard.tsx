@@ -1,58 +1,27 @@
 import { useEffect, useRef, useState } from 'react';
 import { assetUrl } from '../lib/assets';
 import { formatPrice } from '../lib/format';
-import { enqueueVideoWarm } from '../lib/warmVideos';
+import type { VideoRegister } from '../lib/useVideoDirector';
 import type { MenuItem } from '../types';
 
 type DishCardProps = {
   item: MenuItem;
   onOpen: (item: MenuItem) => void;
   delayMs?: number;
-  videosLive?: boolean;
   priority?: boolean;
+  register: VideoRegister;
 };
 
-export function DishCard({ item, onOpen, delayMs = 0, videosLive = true, priority = false }: DishCardProps) {
+export function DishCard({ item, onOpen, delayMs = 0, priority = false, register }: DishCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [hot, setHot] = useState(false);
   const [playing, setPlaying] = useState(false);
   const playable = Boolean(item.video) && item.available;
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !playable) return;
-    return enqueueVideoWarm(
-      () =>
-        new Promise((resolve) => {
-          const el = videoRef.current;
-          if (!el || el.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-            resolve();
-            return;
-          }
-          const finish = () => {
-            el.removeEventListener('canplay', finish);
-            resolve();
-          };
-          el.preload = 'auto';
-          el.addEventListener('canplay', finish);
-          el.load();
-          window.setTimeout(finish, 12000);
-        }),
-    );
-  }, [playable, item.video]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !playable) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (hot && videosLive && !reduce) {
-      video.preload = 'auto';
-      video.muted = true;
-      void video.play().catch(() => undefined);
-      return;
-    }
-    video.pause();
-  }, [hot, playable, videosLive]);
+    return register(item.id, video);
+  }, [playable, item.id, item.video, register]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -79,10 +48,6 @@ export function DishCard({ item, onOpen, delayMs = 0, videosLive = true, priorit
           onOpen(item);
         }
       }}
-      onPointerEnter={() => setHot(true)}
-      onPointerLeave={() => setHot(false)}
-      onFocus={() => setHot(true)}
-      onBlur={() => setHot(false)}
       style={{ animationDelay: `${delayMs}ms` }}
       className={`dish-card group flex h-full cursor-pointer flex-col bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-ink/30 ${
         item.available ? '' : 'is-stopped'
@@ -106,7 +71,6 @@ export function DishCard({ item, onOpen, delayMs = 0, videosLive = true, priorit
             }`}
             src={assetUrl(item.video)}
             muted
-            loop
             playsInline
             preload="none"
           />
