@@ -1,9 +1,25 @@
 {
   "categories": [
-    { "id": "antipasti", "name": "Антипасти", "order": 1 },
-    { "id": "pasta", "name": "Паста", "order": 2 },
-    { "id": "grill", "name": "Гриль", "order": 3 },
-    { "id": "dolci", "name": "Десерты", "order": 4 }
+    {
+      "id": "antipasti",
+      "name": "Антипасти",
+      "order": 1
+    },
+    {
+      "id": "pasta",
+      "name": "Паста",
+      "order": 2
+    },
+    {
+      "id": "grill",
+      "name": "Гриль",
+      "order": 3
+    },
+    {
+      "id": "dolci",
+      "name": "Десерты",
+      "order": 4
+    }
   ],
   "items": [
     {
@@ -12,10 +28,13 @@
       "name": "Капрезе",
       "description": "Моцарелла, спелые томаты и базилик. Масло холодного отжима и крупная соль.",
       "composition": "Моцарелла, томаты, базилик, оливковое масло, морская соль, чёрный перец.",
-      "price": 790,
+      "price": 990,
       "weight": "220 г",
       "calories": 380,
-      "tags": ["сыр", "томаты"],
+      "tags": [
+        "сыр",
+        "томаты"
+      ],
       "image": "media/caprese.webp",
       "video": "media/caprese.mp4",
       "available": true,
@@ -31,7 +50,10 @@
       "price": 980,
       "weight": "140 г",
       "calories": 310,
-      "tags": ["рыба", "сырое"],
+      "tags": [
+        "рыба",
+        "сырое"
+      ],
       "image": "media/tartare.webp",
       "video": "media/tartare.mp4",
       "available": true,
@@ -47,7 +69,10 @@
       "price": 890,
       "weight": "320 г",
       "calories": 740,
-      "tags": ["паста", "мясо"],
+      "tags": [
+        "паста",
+        "мясо"
+      ],
       "image": "media/penne.webp",
       "video": "media/penne.mp4",
       "available": true,
@@ -63,7 +88,10 @@
       "price": 790,
       "weight": "300 г",
       "calories": 690,
-      "tags": ["паста", "яйцо"],
+      "tags": [
+        "паста",
+        "яйцо"
+      ],
       "image": "media/carbonara.webp",
       "video": "media/carbonara.mp4",
       "available": true,
@@ -79,7 +107,10 @@
       "price": 920,
       "weight": "280 г",
       "calories": 540,
-      "tags": ["рис", "сыр"],
+      "tags": [
+        "рис",
+        "сыр"
+      ],
       "image": "media/risotto.webp",
       "video": "media/risotto.mp4",
       "available": true,
@@ -95,7 +126,10 @@
       "price": 1680,
       "weight": "280 г",
       "calories": 520,
-      "tags": ["рыба", "гриль"],
+      "tags": [
+        "рыба",
+        "гриль"
+      ],
       "image": "media/salmon.webp",
       "video": "media/salmon.mp4",
       "available": true,
@@ -111,7 +145,10 @@
       "price": 840,
       "weight": "280 г",
       "calories": 480,
-      "tags": ["курица", "лимон"],
+      "tags": [
+        "курица",
+        "лимон"
+      ],
       "image": "media/pollo.webp",
       "video": "media/pollo.mp4",
       "available": true,
@@ -127,7 +164,10 @@
       "price": 590,
       "weight": "160 г",
       "calories": 430,
-      "tags": ["десерт", "кофе"],
+      "tags": [
+        "десерт",
+        "кофе"
+      ],
       "image": "media/tiramisu.webp",
       "video": "media/tiramisu.mp4",
       "available": true,
@@ -143,7 +183,10 @@
       "price": 520,
       "weight": "140 г",
       "calories": 340,
-      "tags": ["десерт", "ягоды"],
+      "tags": [
+        "десерт",
+        "ягоды"
+      ],
       "image": "media/panna.webp",
       "video": "media/panna.mp4",
       "available": true,
@@ -159,7 +202,10 @@
       "price": 420,
       "weight": "120 г",
       "calories": 260,
-      "tags": ["десерт", "холодное"],
+      "tags": [
+        "десерт",
+        "холодное"
+      ],
       "image": "media/gelato.webp",
       "video": "media/gelato.mp4",
       "available": true,
