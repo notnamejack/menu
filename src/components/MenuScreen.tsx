@@ -1,5 +1,5 @@
 import { Search, X } from 'lucide-react';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useKioskIdle, useKioskMode } from '../lib/useKiosk';
 import type { MenuData, MenuItem } from '../types';
 import { DishCard } from './DishCard';
@@ -16,6 +16,15 @@ export function MenuScreen({ menu }: MenuScreenProps) {
   const [active, setActive] = useState('all');
   const [opened, setOpened] = useState<MenuItem | null>(null);
   const [kiosk, toggleKiosk] = useKioskMode();
+
+  useEffect(() => {
+    setOpened((current) => {
+      if (!current) return null;
+      const next = menu.items.find((item) => item.id === current.id);
+      if (!next?.published) return null;
+      return JSON.stringify(next) === JSON.stringify(current) ? current : next;
+    });
+  }, [menu]);
 
   const sections = useMemo(() => {
     const needle = query.trim().toLowerCase();

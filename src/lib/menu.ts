@@ -139,11 +139,16 @@ function preloadImages(menu: MenuData) {
   }
 }
 
-export async function loadMenu(): Promise<MenuData> {
-  const url = `${import.meta.env.BASE_URL}data/menu.json`;
+export const MENU_POLL_MS = 15_000;
+
+function menuUrl(): string {
+  return `${import.meta.env.BASE_URL}data/menu.json`;
+}
+
+async function fetchMenu(url: string, cache: RequestCache): Promise<MenuData> {
   let response: Response;
   try {
-    response = await fetch(url);
+    response = await fetch(url, { cache });
   } catch {
     throw new MenuError('Не удалось загрузить меню. Проверьте сеть и обновите страницу.');
   }
@@ -156,7 +161,19 @@ export async function loadMenu(): Promise<MenuData> {
   } catch {
     throw new MenuError('Файл меню повреждён: это не JSON.');
   }
-  const menu = parseMenu(json);
+  return parseMenu(json);
+}
+
+export function menuSnapshot(menu: MenuData): string {
+  return JSON.stringify(menu);
+}
+
+export async function loadMenu(): Promise<MenuData> {
+  const menu = await fetchMenu(menuUrl(), 'default');
   preloadImages(menu);
   return menu;
+}
+
+export async function loadFreshMenu(): Promise<MenuData> {
+  return fetchMenu(`${menuUrl()}?t=${Date.now()}`, 'no-store');
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MenuScreen } from './components/MenuScreen';
-import { loadMenu } from './lib/menu';
+import { loadFreshMenu, loadMenu, MENU_POLL_MS, menuSnapshot } from './lib/menu';
 import type { MenuData } from './types';
 
 type LoadState =
@@ -29,6 +29,35 @@ export function App() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (state.status === 'loading') return;
+    let cancelled = false;
+
+    const tick = () => {
+      loadFreshMenu().then(
+        (menu) => {
+          if (cancelled) return;
+          setState((current) => {
+            if (current.status === 'ready' && menuSnapshot(current.menu) === menuSnapshot(menu)) return current;
+            return { status: 'ready', menu };
+          });
+        },
+        () => undefined,
+      );
+    };
+
+    const timer = window.setInterval(tick, MENU_POLL_MS);
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') tick();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, [state.status]);
 
   if (state.status === 'ready') return <MenuScreen menu={state.menu} />;
 
