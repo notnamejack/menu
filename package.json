@@ -2,6 +2,7 @@
   "name": "osteria-alba-menu",
   "private": true,
   "version": "1.0.0",
+  "description": "Меню зала Osteria Alba: антипасти, паста, гриль и десерты, с фото и коротким видео.",
   "type": "module",
   "scripts": {
     "dev": "vite --open",
