@@ -1,3 +1,4 @@
+import { assetUrl } from './assets';
 import type { Category, MenuData, MenuItem } from '../types';
 
 export class MenuError extends Error {
@@ -129,11 +130,20 @@ export function parseMenu(data: unknown): MenuData {
   return { categories, items };
 }
 
+function preloadImages(menu: MenuData) {
+  for (const item of menu.items) {
+    if (!item.published || !item.image) continue;
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = assetUrl(item.image);
+  }
+}
+
 export async function loadMenu(): Promise<MenuData> {
-  const url = `${import.meta.env.BASE_URL}data/menu.json?t=${Date.now()}`;
+  const url = `${import.meta.env.BASE_URL}data/menu.json`;
   let response: Response;
   try {
-    response = await fetch(url, { cache: 'no-store' });
+    response = await fetch(url);
   } catch {
     throw new MenuError('Не удалось загрузить меню. Проверьте сеть и обновите страницу.');
   }
@@ -146,5 +156,7 @@ export async function loadMenu(): Promise<MenuData> {
   } catch {
     throw new MenuError('Файл меню повреждён: это не JSON.');
   }
-  return parseMenu(json);
+  const menu = parseMenu(json);
+  preloadImages(menu);
+  return menu;
 }

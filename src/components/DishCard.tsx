@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { assetUrl } from '../lib/assets';
 import { formatPrice } from '../lib/format';
+import { enqueueVideoWarm } from '../lib/warmVideos';
 import type { MenuItem } from '../types';
 
 type DishCardProps = {
@@ -8,9 +9,10 @@ type DishCardProps = {
   onOpen: (item: MenuItem) => void;
   delayMs?: number;
   videosLive?: boolean;
+  priority?: boolean;
 };
 
-export function DishCard({ item, onOpen, delayMs = 0, videosLive = true }: DishCardProps) {
+export function DishCard({ item, onOpen, delayMs = 0, videosLive = true, priority = false }: DishCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hot, setHot] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -19,8 +21,32 @@ export function DishCard({ item, onOpen, delayMs = 0, videosLive = true }: DishC
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !playable) return;
+    return enqueueVideoWarm(
+      () =>
+        new Promise((resolve) => {
+          const el = videoRef.current;
+          if (!el || el.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+            resolve();
+            return;
+          }
+          const finish = () => {
+            el.removeEventListener('canplay', finish);
+            resolve();
+          };
+          el.preload = 'auto';
+          el.addEventListener('canplay', finish);
+          el.load();
+          window.setTimeout(finish, 12000);
+        }),
+    );
+  }, [playable, item.video]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !playable) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (hot && videosLive && !reduce) {
+      video.preload = 'auto';
       video.muted = true;
       void video.play().catch(() => undefined);
       return;
@@ -66,6 +92,8 @@ export function DishCard({ item, onOpen, delayMs = 0, videosLive = true }: DishC
         <img
           src={assetUrl(item.image)}
           alt=""
+          decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
           className={`h-full w-full object-cover transition duration-700 ${
             item.available ? 'group-hover:scale-[1.02]' : ''
           }`}

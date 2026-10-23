@@ -42,7 +42,7 @@ body {
 
 .dish-video {
   opacity: 0;
-  transition: opacity 700ms ease;
+  transition: opacity 180ms ease;
 }
 
 .dish-video.is-on {

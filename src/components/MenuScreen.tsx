@@ -184,6 +184,7 @@ export function MenuScreen({ menu }: MenuScreenProps) {
                         onOpen={setOpened}
                         delayMs={Math.min(index, 6) * 45}
                         videosLive={opened === null}
+                        priority={section.category.order === 1 && index < 4}
                       />
                     ))}
                   </div>

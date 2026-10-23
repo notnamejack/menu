@@ -8,12 +8,14 @@ type LoadState =
   | { status: 'ready'; menu: MenuData }
   | { status: 'error'; message: string };
 
+const menuPromise = loadMenu();
+
 export function App() {
   const [state, setState] = useState<LoadState>({ status: 'loading' });
 
   useEffect(() => {
     let cancelled = false;
-    loadMenu().then(
+    menuPromise.then(
       (menu) => {
         if (!cancelled) setState({ status: 'ready', menu });
       },
