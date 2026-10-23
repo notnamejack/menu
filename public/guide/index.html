@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Как менять меню — Osteria Alba</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Manrope:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color: #111;
+        background: #fff;
+        font-family: Manrope, "Segoe UI", sans-serif;
+        font-size: 17px;
+        line-height: 1.5;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+      }
+      h1,
+      h2 {
+        font-family: "Cormorant Garamond", Palatino, serif;
+        font-weight: 400;
+      }
+      h1 {
+        margin: 0;
+        font-size: 3rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 0.95;
+      }
+      .eyebrow {
+        margin: 10px 0 0;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #6a6a6a;
+        font-size: 0.78rem;
+      }
+      .lead {
+        max-width: 38rem;
+        margin: 22px 0 0;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+        margin: 28px 0 8px;
+        padding: 16px 0;
+        border-top: 1px solid #e8e8e8;
+        border-bottom: 1px solid #e8e8e8;
+      }
+      nav a {
+        color: #111;
+      }
+      a {
+        color: inherit;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+      .actions a {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        padding: 0 18px;
+        border: 1px solid #111;
+        text-decoration: none;
+      }
+      section {
+        margin-top: 56px;
+      }
+      h2 {
+        margin: 0 0 12px;
+        font-size: 2.1rem;
+      }
+      p {
+        margin: 0 0 12px;
+      }
+      ol {
+        margin: 0 0 16px;
+        padding-left: 1.2rem;
+      }
+      li + li {
+        margin-top: 6px;
+      }
+      figure {
+        margin: 16px 0 0;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #e8e8e8;
+      }
+      figcaption {
+        margin-top: 8px;
+        color: #6a6a6a;
+        font-size: 0.92rem;
+      }
+      code {
+        font-family: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Osteria Alba</p>
+      <h1>Как менять меню</h1>
+      <p class="lead">
+        Эту страницу можно открыть самой: на меню зала, рядом с «Для кухни», есть ссылка «Инструкция».
+        В режиме киоска ссылки нет. Сначала нажмите «Закрыть киоск».
+      </p>
+      <div class="actions">
+        <a href="../admin/">Открыть админку</a>
+        <a href="../">Открыть меню зала</a>
+      </div>
+      <nav>
+        <a href="#enter">Вход</a>
+        <a href="#open">Открыть запись</a>
+        <a href="#hall">Что видит зал</a>
+        <a href="#find">Найти блюдо</a>
+        <a href="#text">Текст</a>
+        <a href="#price">Цена</a>
+        <a href="#media">Фото и видео</a>
+        <a href="#stop">Стоп-лист</a>
+        <a href="#save">Сохранить</a>
+      </nav>
+
+      <section id="enter">
+        <h2>1. Войти</h2>
+        <p>Админка открывается кнопкой «Для кухни» на меню зала. Прямой адрес: <a href="../admin/">/admin/</a>.</p>
+        <p>Синяя кнопка «Войти через GitHub» не нужна. Нажмите нижнюю: <strong>Войти с помощью токена доступа</strong> и вставьте токен. Его даёт тот, кто настраивал сайт.</p>
+        <figure>
+          <img src="00-login.png" alt="Экран входа Sveltia CMS: Войти через GitHub и Войти с помощью токена доступа" />
+          <figcaption>Нужна нижняя кнопка. Пароль от GitHub сюда не вводится.</figcaption>
+        </figure>
+        <p>Токен запоминается в этом браузере. На другом планшете вход нужно сделать ещё раз.</p>
+        <p>Если после правки вылезает окно «Resource not accessible by personal access token», этот токен умеет только смотреть меню, но не сохранять. Нужен новый, с правом записи. Пока такого токена нет, цена в зале не изменится.</p>
+      </section>
+
+      <section id="open">
+        <h2>2. Открыть меню</h2>
+        <p>Слева коллекция <strong>Меню</strong>. В центре одна строка, тоже <strong>Меню</strong>. Нажмите на строку.</p>
+        <figure>
+          <img src="01-vhod.png" alt="Слева коллекция Меню, в центре одна строка Меню" />
+          <figcaption>Нажмите на строку «Меню» в центре, не на поиск сверху.</figcaption>
+        </figure>
+      </section>
+
+      <section id="hall">
+        <h2>3. Что видит зал</h2>
+        <p>На карточке в зале: фото, название, цена, короткое описание и вес. Категории слева.</p>
+        <figure>
+          <img src="09-zal.png" alt="Гостевое меню: Капрезе 790 рублей и тартар из лосося" />
+          <figcaption>Описание — серый текст под названием. Цена — число справа.</figcaption>
+        </figure>
+        <p>Если нажать на блюдо, откроется карточка. Туда попадают состав, калории и теги. Видео играет на фото, если оно загружено.</p>
+        <figure>
+          <img src="10-kartochka.png" alt="Открытая карточка Капрезе: фото, описание, состав, вес и калории" />
+          <figcaption>«220 г | 790 ₽» собирается из полей Вес и Цена. Блок «Состав» — отдельное поле.</figcaption>
+        </figure>
+      </section>
+
+      <section id="find">
+        <h2>4. Найти блюдо</h2>
+        <p>В админке прокрутите до списка <strong>Блюда</strong>. Строка уже показывает название и цену, например «Капрезе — 790 ₽». Нажмите стрелку слева от номера, чтобы раскрыть.</p>
+        <p><strong>Expand All</strong> раскрывает все блюда, <strong>Collapse All</strong> сворачивает. В русском браузере это «Развернуть все» и «Свернуть все».</p>
+        <figure>
+          <img src="03-spisok-blyud.png" alt="Список блюд: Капрезе 790, тартар 980, пенне 890, карбонара 790" />
+          <figcaption>Ищите блюдо по этой строке. Поле ID внутри не трогайте.</figcaption>
+        </figure>
+      </section>
+
+      <section id="text">
+        <h2>5. Название, категория, описание</h2>
+        <figure>
+          <img src="05-polya.png" alt="Поля ID, категория, название и описание у Капрезе" />
+          <figcaption>ID оставьте как есть. Категория — одна из четырёх кнопок. Название и описание меняйте прямо в полях.</figcaption>
+        </figure>
+        <p>Ниже есть поле <strong>Состав</strong>. Оно видно только в открытой карточке, не на плитке в зале.</p>
+      </section>
+
+      <section id="price">
+        <h2>6. Цена, вес, калории</h2>
+        <p>В цену пишите только число: <strong>790</strong>, без знака рубля и без пробелов. Вес пишите так, как он должен читаться: <strong>220 г</strong>.</p>
+        <figure>
+          <img src="06-cena.png" alt="Поля цена 790, вес 220 г, калории 380 и теги" />
+          <figcaption>Тег добавляется кнопкой Add под списком тегов. Крестик справа удаляет тег.</figcaption>
+        </figure>
+      </section>
+
+      <section id="media">
+        <h2>7. Фото и видео</h2>
+        <p><strong>Replace</strong> у фото или видео заменяет файл. <strong>Remove</strong> у видео убирает ролик, на карточке остаётся фото. В русском браузере: «Заменить» и «Удалить».</p>
+        <p>Фото: WebP или JPG, примерно до 500 КБ. Видео: MP4 без звука, до 10 секунд и 5 МБ.</p>
+        <figure>
+          <img src="07-foto.png" alt="Кнопки Replace у фото и Replace, Remove у видео" />
+          <figcaption>Новый файл выбирайте через Replace. Так у картинки будет новое имя, и зал не увидит старую из памяти браузера.</figcaption>
+        </figure>
+      </section>
+
+      <section id="stop">
+        <h2>8. Стоп-лист и скрыть блюдо</h2>
+        <p>Оба переключателя внизу того же блюда.</p>
+        <ul>
+          <li><strong>В наличии</strong> выключен — блюдо остаётся в меню серым, с подписью «Нет в наличии».</li>
+          <li><strong>Опубликовано</strong> выключен — блюдо пропадает и из списка, и из поиска.</li>
+        </ul>
+        <p><strong>Порядок</strong> — место среди блюд этой категории. Меньше число, выше карточка. Перетаскивать строки в админке не нужно: зал смотрит только на это число.</p>
+        <figure>
+          <img src="08-pereklyuchateli.png" alt="Переключатели В наличии и Опубликовано, поле Порядок" />
+          <figcaption>Синий переключатель включён. Серый — выключен. После этого всё равно нужно нажать Save.</figcaption>
+        </figure>
+      </section>
+
+      <section id="save">
+        <h2>9. Сохранить</h2>
+        <p>Кнопка <strong>Save</strong> справа сверху. Пока ничего не изменено, она серая. В русском браузере она называется «Сохранить».</p>
+        <p>Одна кнопка сохраняет всё: и категории, и все блюда, и новые файлы. Нажимать её нужно один раз, в конце.</p>
+        <figure>
+          <img src="02-kategorii.png" alt="Сверху справа серая кнопка Save, ниже список категорий" />
+          <figcaption>Категории обычно не меняют. Если меняете название раздела, ID вроде antipasti не трогайте. Новое блюдо — кнопка Add Блюда внизу списка.</figcaption>
+        </figure>
+        <p>Зал не видит правку в ту же секунду. После Save подождите около минуты, пока сайт соберётся. Уже открытый экран в зале подхватит новую цену, текст, фото и видео сам. Если через пару минут всё ещё старое — обновите страницу меню.</p>
+      </section>
+    </main>
+  </body>
+</html>

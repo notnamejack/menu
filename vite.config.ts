@@ -8,7 +8,8 @@ function rewriteAdminIndex(req: IncomingMessage) {
   const queryAt = req.url.indexOf('?');
   const path = queryAt === -1 ? req.url : req.url.slice(0, queryAt);
   const search = queryAt === -1 ? '' : req.url.slice(queryAt);
-  if (path.endsWith('/admin') || path.endsWith('/admin/')) {
+  const folder = ['/admin', '/guide'].find((name) => path.endsWith(name) || path.endsWith(`${name}/`));
+  if (folder) {
     const directory = path.endsWith('/') ? path : `${path}/`;
     req.url = `${directory}index.html${search}`;
   }

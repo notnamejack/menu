@@ -134,12 +134,20 @@ export function MenuScreen({ menu }: MenuScreenProps) {
               {kiosk ? 'Закрыть киоск' : 'Киоск'}
             </button>
             {kiosk ? null : (
-              <a
-                href={`${import.meta.env.BASE_URL}admin/`}
-                className="inline-flex min-h-12 items-center px-3 text-base whitespace-nowrap text-muted"
-              >
-                Для кухни
-              </a>
+              <>
+                <a
+                  href={`${import.meta.env.BASE_URL}guide/`}
+                  className="inline-flex min-h-12 items-center px-3 text-base whitespace-nowrap text-muted"
+                >
+                  Инструкция
+                </a>
+                <a
+                  href={`${import.meta.env.BASE_URL}admin/`}
+                  className="inline-flex min-h-12 items-center px-3 text-base whitespace-nowrap text-muted"
+                >
+                  Для кухни
+                </a>
+              </>
             )}
           </div>
         </div>
