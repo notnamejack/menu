@@ -26,32 +26,19 @@ npm run dev
 
 Откроется `http://localhost:5173/`. Сборка: `npm run build`, превью сборки: `npm run preview`.
 
-Локально `base` в Vite равен `/`. На Pages он `/menu/`: workflow передаёт `BASE_PATH`.
+Локально `base` в Vite равен `/`. На Pages он равен `/<имя репозитория>/`: workflow передаёт `BASE_PATH`.
 
 ## GitHub Pages
 
-Репозиторий: `notnamejack/menu`. Settings → Pages → Source: **GitHub Actions**. Workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) запускается на push в `main` и вручную.
-
-Сайт: `https://notnamejack.github.io/menu/`.
+Settings → Pages → Source: **GitHub Actions**. Workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) запускается на push в `main` и вручную.
 
 Первый деплой иногда просит подтвердить environment `github-pages` в настройках репозитория. После сохранения в админке зал подхватывает новое меню примерно через минуту: запрос к `menu.json` идёт с меткой времени.
 
 ## Админка
 
-Отдельная страница, не маршрут гостевого меню:
+Отдельная страница, не маршрут гостевого меню: локально `http://localhost:5173/admin/`, на опубликованном сайте тот же путь `/admin/`.
 
-- локально: `http://localhost:5173/admin/`
-- на Pages: `https://notnamejack.github.io/menu/admin/`
-
-В [`public/admin/config.yml`](public/admin/config.yml) репозиторий уже указан: `notnamejack/menu`, ветка `main`.
-
-Токен — fine-grained personal access token:
-
-1. GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens.
-2. Repository access: только `notnamejack/menu`.
-3. Permissions → Repository → Contents: Read and write.
-
-На входе Sveltia нажмите **Войти с токеном** и вставьте PAT. Токен хранит браузер в `localStorage`. Интерфейс на русском, если язык браузера русский.
+Репозиторий и ветка заданы в [`public/admin/config.yml`](public/admin/config.yml). Вход для кухни описан на странице `/guide/`. Токен выдаёт тот, кто ведёт сайт. В репозиторий он не попадает.
 
 На меню зала есть ссылки **Инструкция** (`/guide/`) и **Для кухни**. В киоске их нет.
 
@@ -61,7 +48,6 @@ npm run dev
 
 - iPad: Guided Access и меню в Safari или «На экран Домой».
 - Android: Fully Kiosk Browser, стартовый URL с `?kiosk=1`.
-- Пример: `https://notnamejack.github.io/menu/?kiosk=1`
 
 Режим запоминается в `sessionStorage`. Кнопка **Киоск** делает то же самое. Зоны нажатия от 48px, выделение текста выключено. После 60 секунд без касаний, клавиш и прокрутки закрывается карточка, очищается поиск, страница уезжает наверх, категория сбрасывается на «Всё меню».
 
