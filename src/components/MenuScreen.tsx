@@ -1,7 +1,6 @@
 import { Search, X } from 'lucide-react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { useKioskIdle, useKioskMode } from '../lib/useKiosk';
-import { useVideoDirector } from '../lib/useVideoDirector';
 import type { MenuData, MenuItem } from '../types';
 import { DishCard } from './DishCard';
 import { DishModal } from './DishModal';
@@ -17,7 +16,6 @@ export function MenuScreen({ menu }: MenuScreenProps) {
   const [active, setActive] = useState('all');
   const [opened, setOpened] = useState<MenuItem | null>(null);
   const [kiosk, toggleKiosk] = useKioskMode();
-  const register = useVideoDirector(scrollRef, opened !== null);
 
   const sections = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -183,9 +181,9 @@ export function MenuScreen({ menu }: MenuScreenProps) {
                       <DishCard
                         key={item.id}
                         item={item}
-                        register={register}
                         onOpen={setOpened}
                         delayMs={Math.min(index, 6) * 45}
+                        videosLive={opened === null}
                       />
                     ))}
                   </div>

@@ -1,26 +1,32 @@
 import { useEffect, useRef, useState } from 'react';
 import { assetUrl } from '../lib/assets';
 import { formatPrice } from '../lib/format';
-import type { VideoRegister } from '../lib/useVideoDirector';
 import type { MenuItem } from '../types';
 
 type DishCardProps = {
   item: MenuItem;
-  register: VideoRegister;
   onOpen: (item: MenuItem) => void;
   delayMs?: number;
+  videosLive?: boolean;
 };
 
-export function DishCard({ item, register, onOpen, delayMs = 0 }: DishCardProps) {
-  const cardRef = useRef<HTMLElement>(null);
+export function DishCard({ item, onOpen, delayMs = 0, videosLive = true }: DishCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [hot, setHot] = useState(false);
   const [playing, setPlaying] = useState(false);
   const playable = Boolean(item.video) && item.available;
 
   useEffect(() => {
-    if (!playable || !cardRef.current || !videoRef.current) return;
-    return register(item.id, cardRef.current, videoRef.current);
-  }, [item.id, playable, register]);
+    const video = videoRef.current;
+    if (!video || !playable) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (hot && videosLive && !reduce) {
+      video.muted = true;
+      void video.play().catch(() => undefined);
+      return;
+    }
+    video.pause();
+  }, [hot, playable, videosLive]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -37,7 +43,6 @@ export function DishCard({ item, register, onOpen, delayMs = 0 }: DishCardProps)
 
   return (
     <article
-      ref={cardRef}
       role="button"
       tabIndex={0}
       aria-label={item.available ? `Открыть «${item.name}»` : `«${item.name}», нет в наличии`}
@@ -48,6 +53,10 @@ export function DishCard({ item, register, onOpen, delayMs = 0 }: DishCardProps)
           onOpen(item);
         }
       }}
+      onPointerEnter={() => setHot(true)}
+      onPointerLeave={() => setHot(false)}
+      onFocus={() => setHot(true)}
+      onBlur={() => setHot(false)}
       style={{ animationDelay: `${delayMs}ms` }}
       className={`dish-card group flex h-full cursor-pointer flex-col bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-ink/30 ${
         item.available ? '' : 'is-stopped'
@@ -71,7 +80,7 @@ export function DishCard({ item, register, onOpen, delayMs = 0 }: DishCardProps)
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
           />
         ) : null}
       </div>

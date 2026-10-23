@@ -33,26 +33,10 @@
       "calories": 310,
       "tags": ["рыба", "сырое"],
       "image": "media/tartare.webp",
-      "video": null,
+      "video": "media/tartare.mp4",
       "available": true,
       "published": true,
       "order": 2
-    },
-    {
-      "id": "bruschetta",
-      "categoryId": "antipasti",
-      "name": "Брускетта",
-      "description": "Хлеб на закваске, томаты и чеснок. Пока только на кухне.",
-      "composition": "Хлеб на закваске, томаты, чеснок, петрушка, оливковое масло, соль.",
-      "price": 490,
-      "weight": "160 г",
-      "calories": 340,
-      "tags": ["хлеб", "томаты"],
-      "image": "media/bruschetta.webp",
-      "video": null,
-      "available": true,
-      "published": false,
-      "order": 3
     },
     {
       "id": "penne",
@@ -81,7 +65,7 @@
       "calories": 690,
       "tags": ["паста", "яйцо"],
       "image": "media/carbonara.webp",
-      "video": null,
+      "video": "media/carbonara.mp4",
       "available": true,
       "published": true,
       "order": 2
@@ -97,7 +81,7 @@
       "calories": 540,
       "tags": ["рис", "сыр"],
       "image": "media/risotto.webp",
-      "video": null,
+      "video": "media/risotto.mp4",
       "available": true,
       "published": true,
       "order": 3
@@ -119,22 +103,6 @@
       "order": 1
     },
     {
-      "id": "tagliata",
-      "categoryId": "grill",
-      "name": "Тальята",
-      "description": "Говядина средней прожарки, нарезанная ломтями у гриля.",
-      "composition": "Говяжья вырезка, морская соль, чёрный перец, оливковое масло, розмарин.",
-      "price": 1640,
-      "weight": "250 г",
-      "calories": 610,
-      "tags": ["говядина", "гриль"],
-      "image": "media/tagliata.webp",
-      "video": null,
-      "available": false,
-      "published": true,
-      "order": 2
-    },
-    {
       "id": "pollo",
       "categoryId": "grill",
       "name": "Полло аль лимоне",
@@ -145,7 +113,7 @@
       "calories": 480,
       "tags": ["курица", "лимон"],
       "image": "media/pollo.webp",
-      "video": null,
+      "video": "media/pollo.mp4",
       "available": true,
       "published": true,
       "order": 3
@@ -177,7 +145,7 @@
       "calories": 340,
       "tags": ["десерт", "ягоды"],
       "image": "media/panna.webp",
-      "video": null,
+      "video": "media/panna.mp4",
       "available": true,
       "published": true,
       "order": 2
@@ -193,7 +161,7 @@
       "calories": 260,
       "tags": ["десерт", "холодное"],
       "image": "media/gelato.webp",
-      "video": null,
+      "video": "media/gelato.mp4",
       "available": true,
       "published": true,
       "order": 3
