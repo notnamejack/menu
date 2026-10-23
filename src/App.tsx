@@ -65,7 +65,7 @@ export function App() {
     <div className="flex min-h-dvh items-center justify-center bg-paper px-6 text-ink">
       <div className="max-w-lg">
         <h1 className="wordmark">Osteria Alba</h1>
-        <p className="eyebrow mt-3 text-[13px] tracking-[0.16em] text-muted lowercase">cucina italiana</p>
+        <p className="eyebrow mt-3 text-[13px] tracking-[0.28em] text-muted uppercase">cucina italiana</p>
         {state.status === 'loading' ? (
           <p className="mt-8 text-base text-muted">Открываем меню…</p>
         ) : (

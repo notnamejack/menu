@@ -1,7 +1,7 @@
 {
   "name": "Osteria Alba — меню",
   "short_name": "Osteria Alba",
-  "description": "Цифровое меню Osteria Alba. Cucina italiana.",
+  "description": "Меню зала Osteria Alba: антипасти, паста, гриль и десерты, с фото и коротким видео.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
